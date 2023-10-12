@@ -1,0 +1,20 @@
+@use 'palette';
+@use 'material/theming';
+
+$app-light-theme: theming.define-light-theme((
+  color: (
+    primary: palette.$app-light-primary,
+    accent: palette.$app-accent,
+    warn: palette.$app-warn,
+  )
+));
+
+$app-dark-theme: theming.define-dark-theme((
+  color: (
+    primary: palette.$app-dark-primary,
+    accent: palette.$app-accent,
+    warn: palette.$app-warn,
+  )
+));
+
+$app-theme: $app-light-theme;

@@ -1,0 +1,122 @@
+<app-logo class="site-logo" routerLink="/"></app-logo>
+<mat-nav-list class="navigation-drawer-menu">
+  <ng-container *ngFor="let menuGroup of menus; let last = last;">
+    <h4 *ngIf="menuGroup.name" mat-subheader>{{ menuGroup.name | titlecase }}</h4>
+    <ng-container *ngFor="let menuItem of menuGroup.children">
+      <ng-container *ngIf="!menuItem.children">
+        <a [routerLink]="menuItem.path" mat-list-item
+           routerLinkActive="active">
+          <mat-icon *ngIf="!menuItem.icon?.custom" class="list-icon navigation-drawer-list-icon"
+                    matListItemIcon>{{ menuItem.icon?.name
+            }}
+          </mat-icon>
+          <mat-icon *ngIf="menuItem.icon && menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon navigation-drawer-list-icon"
+                    matListItemIcon></mat-icon>
+          <span matListItemTitle>
+          {{ menuItem.name }}
+        </span>
+
+        </a>
+      </ng-container>
+      <ng-container *ngIf="menuItem.children">
+        <mat-expansion-panel
+          *ngIf="menuItem.name as groupName"
+          class="expandable-list mat-elevation-z0"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}"
+          [@.disabled]="true"
+          #rla="routerLinkActive"
+          [expanded]="rla.isActive"
+          [disabled]="rla.isActive"
+
+          dense>
+          <mat-expansion-panel-header>
+            <a mat-list-item routerLinkActive="active" [disableRipple]="true">
+              <ng-container *ngIf="menuItem.icon">
+                <mat-icon *ngIf="menuItem.icon.custom; else defaultIcon;"
+                          [svgIcon]="menuItem.icon.name"
+                          class="list-icon navigation-drawer-list-icon"
+                          matListItemIcon></mat-icon>
+                <ng-template #defaultIcon>
+                  <mat-icon class="list-icon navigation-drawer-list-icon" matListItemIcon>
+                    {{ menuItem.icon.name }}</mat-icon>
+                </ng-template>
+              </ng-container>
+              <div class="title-with-spacer selected-user-group-text">{{ groupName }}</div>
+            </a>
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+
+            <ng-container *ngFor="let subMenuItem of menuItem.children">
+              <a *ngIf="subMenuItem.name as menuName;" [routerLink]="subMenuItem.path"
+                 class="sub-menu-item" mat-list-item routerLinkActive="active">
+                <mat-icon class="list-icon navigation-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
+                <span matListItemTitle>
+                {{ menuName }}
+              </span>
+              </a>
+            </ng-container>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </ng-container>
+    </ng-container>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </ng-container>
+</mat-nav-list>
+
+<ng-template #menuItemTemplate let-menuItem="menu">
+  <a [routerLink]="menuItem.path" mat-list-item
+     routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon navigation-drawer-list-icon"
+              matListItemIcon>{{ menuItem.icon.name
+      }}
+    </mat-icon>
+    <mat-icon *ngIf="menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon navigation-drawer-list-icon"
+              matListItemIcon></mat-icon>
+    <span matListItemTitle>
+          {{ menuItem.name }}
+      <mat-chip-listbox *ngIf="menuItem.badge">
+          <mat-chip-option class="doc-counter" selectable="false" disableRipple color="primary">
+            {{menuItem.badge}}
+          </mat-chip-option>
+        </mat-chip-listbox>
+        </span>
+
+  </a>
+</ng-template>
+<ng-template #groupItemTemplate let-menuItem="menu">
+  <mat-expansion-panel
+    *ngIf="menuItem.groupName as groupName"
+    class="expandable-list mat-elevation-z0"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+    [@.disabled]="true"
+    #rla="routerLinkActive"
+    [expanded]="rla.isActive"
+    [disabled]="rla.isActive"
+
+    dense>
+    <mat-expansion-panel-header>
+      <a mat-list-item routerLinkActive="active" [disableRipple]="true">
+        <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon navigation-drawer-list-icon" matListItemIcon>
+          {{ menuItem.icon.name }}</mat-icon>
+        <mat-icon *ngIf="menuItem.icon.custom"
+                  [svgIcon]="menuItem.icon.name"
+                  class="list-icon navigation-drawer-list-icon"
+                  matListItemIcon></mat-icon>
+        <div class="title-with-spacer selected-user-group-text">{{ groupName }}</div>
+      </a>
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+      <ng-container *ngFor="let subMenuItem of menuItem.children">
+        <a *ngIf="subMenuItem.name as menuName;" [routerLink]="subMenuItem.path"
+           class="sub-menu-item" mat-list-item routerLinkActive="active">
+          <mat-icon class="list-icon navigation-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
+          <span matListItemTitle>
+                {{ menuName }}
+              </span>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-expansion-panel>
+</ng-template>

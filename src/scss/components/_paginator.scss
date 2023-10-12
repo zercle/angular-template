@@ -1,0 +1,43 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+
+@mixin paginator-themes($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary-palette: map.get($color-config, primary);
+  $accent-palette: map.get($color-config, accent);
+  $foreground-palette: map.get($color-config, foreground);
+  $background-palette: map.get($color-config, background);
+
+  .mat-mdc-paginator {
+    &.paginator-in-card-header {
+      font-size: 0.875em;
+      .mat-mdc-paginator-container {
+        min-height: 64px;
+      }
+      .mat-mdc-paginator-range-actions {
+        border-radius: 24px;
+        //border: solid 1px rgba(mat.get-color-from-palette($foreground-palette, divider), 0.05);
+        background-color: rgba(mat.get-color-from-palette($primary-palette, 600), 0.05);
+      }
+    }
+  }
+
+}
+
+@mixin paginator-colors($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary-palette: map.get($color-config, primary);
+  $foreground-palette: map.get($color-config, foreground);
+  $background-palette: map.get($color-config, background);
+
+  .mat-mdc-paginator {
+    &.paginator-in-card-header {
+      .mat-mdc-paginator-range-actions {
+        //border: solid 1px rgba(mat.get-color-from-palette($foreground-palette, divider), 0.05);
+        //background-color: rgba(mat.get-color-from-palette($primary-palette, 200), 0.05);
+      }
+    }
+  }
+
+}

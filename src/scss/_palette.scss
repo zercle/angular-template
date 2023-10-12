@@ -1,0 +1,170 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+$primary-color: #607d8b;
+$on-light-primary: mix(black, $primary-color, 64%);
+$on-dark-primary: mix(white, $primary-color, 98%);
+
+$primary-palette: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #607d8b,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #263238,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50 : $on-light-primary,
+    100 : $on-light-primary,
+    200 : $on-light-primary,
+    300 : $on-light-primary,
+    400 : $on-light-primary,
+    500 : $on-dark-primary,
+    600 : $on-dark-primary,
+    700 : $on-dark-primary,
+    800 : $on-dark-primary,
+    900 : $on-dark-primary,
+    A100 : $on-light-primary,
+    A200 : $on-light-primary,
+    A400 : $on-light-primary,
+    A700 : $on-dark-primary,
+  )
+);
+
+$accent-color: #5e636e;
+//$on-light-accent: mix(black, $accent-color, 32%);
+$on-light-accent: #202124;
+$on-dark-accent: mix(white, $accent-color, 98%);
+
+$accent-palette: (
+  50: #f6f6f7,
+  100: #e1e3e6,
+  200: #c3c7cc,
+  300: #9da2ab,
+  400: #787d89,
+  500: #5e636e,
+  600: #4a4d57,
+  700: #3e4047,
+  800: #34353b,
+  900: #202124,
+  A100 : #f3f6fb,
+  A200 : #a9bfdf,
+  A400 : #6f8bb3,
+  A700 : #6a809e,
+  contrast: (
+    50 : $on-light-accent,
+    100 : $on-light-accent,
+    200 : $on-light-accent,
+    300 : $on-light-accent,
+    400 : $on-light-accent,
+    500 : $on-dark-accent,
+    600 : $on-dark-accent,
+    700 : $on-dark-accent,
+    800 : $on-dark-accent,
+    900 : $on-dark-accent,
+    A100 : $on-light-accent,
+    A200 : $on-light-accent,
+    A400 : $on-light-accent,
+    A700 : $on-dark-accent,
+  )
+);
+
+$app-light-primary: mat.define-palette($primary-palette, 600);
+$app-dark-primary: mat.define-palette($primary-palette, 300);
+
+$app-accent: mat.define-palette($accent-palette);
+$app-warn: mat.define-palette(mat.$red-palette, 700);
+
+$dark-primary-text: rgba($on-light-accent, 0.87);
+$dark-secondary-text: rgba($on-light-accent, 0.64);
+$dark-disabled-text: rgba($on-light-accent, 0.38);
+$dark-dividers: rgba($on-light-accent, 0.06);
+$dark-focused: rgba($on-light-accent, 0.12);
+$light-primary-text: $on-dark-accent;
+$light-secondary-text: rgba($on-dark-accent, 0.7);
+$light-disabled-text: rgba($on-dark-accent, 0.5);
+$light-dividers: rgba($on-dark-accent, 0.06);
+$light-focused: rgba($on-dark-accent, 0.12);
+
+// Background palette for light themes.
+$light-theme-background-palette: (
+  status-bar: map.get($accent-palette, 300),
+  app-bar: transparent,
+  background: map.get($accent-palette, 50),
+  hover: rgba(map.get($primary-palette, 600), 0.04), // TODO(kara): check style with Material Design UX
+  card: white,
+  dialog: white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map.get($accent-palette, 300),
+  selected-disabled-button: map.get($accent-palette, 400),
+  disabled-button-toggle: map.get($accent-palette, 200),
+  unselected-chip: map.get($accent-palette, 50),
+  disabled-list-option: map.get($accent-palette, 200),
+  tooltip: map.get($accent-palette, 700),
+);
+
+// Background palette for dark themes.
+$dark-theme-background-palette: (
+  status-bar: black,
+  app-bar: transparent,
+  background: map.get($accent-palette, 900),
+  hover: rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card: map.get($accent-palette, 800),
+  dialog: map.get($accent-palette, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map.get($accent-palette, 800),
+  focused-button: $light-focused,
+  selected-button: map.get($accent-palette, 900),
+  selected-disabled-button: map.get($accent-palette, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map.get($accent-palette, 700),
+  disabled-list-option: black,
+  tooltip: map.get($accent-palette, 700),
+);
+
+// Foreground palette for light themes.
+$light-theme-foreground-palette: (
+  base: $on-light-accent,
+  divider: $dark-dividers,
+  dividers: $dark-dividers,
+  disabled: $dark-disabled-text,
+  disabled-button: rgba($on-light-accent, 0.26),
+  disabled-text: $dark-disabled-text,
+  elevation: map.get($accent-palette, 500),
+  hint-text: $dark-disabled-text,
+  secondary-text: $dark-secondary-text,
+  icon: rgba($on-light-accent, 0.54),
+  icons: rgba($on-light-accent, 0.54),
+  text: rgba($on-light-accent, 0.87),
+  slider-min: rgba($on-light-accent, 0.87),
+  slider-off: rgba($on-light-accent, 0.26),
+  slider-off-active: rgba($on-light-accent, 0.38),
+);
+
+// Foreground palette for dark themes.
+$dark-theme-foreground-palette: (
+  base: white,
+  divider: $light-dividers,
+  dividers: $light-dividers,
+  disabled: $light-disabled-text,
+  disabled-button: rgba(white, 0.3),
+  disabled-text: $light-disabled-text,
+  elevation: black,
+  hint-text: $light-disabled-text,
+  secondary-text: $light-secondary-text,
+  icon: white,
+  icons: white,
+  text: white,
+  slider-min: white,
+  slider-off: rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);

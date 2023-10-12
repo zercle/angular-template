@@ -1,0 +1,32 @@
+<header class="tab-container">
+  @if (showBackButton) {
+    <button mat-icon-button [routerLink]="backwardLocation"><mat-icon>arrow_back</mat-icon></button>
+  }
+  @if (pageTitle) {
+    <h1 class="page-title">{{ pageTitle }}</h1>
+  }
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link *ngFor="let link of tabLinks"
+       [routerLink]="link.path"
+       routerLinkActive=""
+       #rla="routerLinkActive"
+
+       [active]="rla.isActive"
+       [disabled]="isLoading() || noData"
+    >
+      @if (link.icon) {
+        <mat-icon>{{link.icon.name}}</mat-icon>
+      }
+      {{ link.name }}
+    </a>
+
+  </nav>
+</header>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet *ngIf="!isLoading() || !noData"></router-outlet>
+  <div *ngIf="!isLoading() && noData">
+    <p>No data</p>
+  </div>
+</mat-tab-nav-panel>

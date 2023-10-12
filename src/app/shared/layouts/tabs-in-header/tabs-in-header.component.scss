@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use 'themes';
+
+::ng-deep app-layout-with-tabs-in-header {
+  display: flex;
+  flex-direction: column;
+  .mdc-tab-indicator {
+    display: none;
+  }
+}
+
+.tab-container {
+  position: sticky;
+  top: var(--top-bar-height, 64px);
+  padding: 0 0 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+
+  .page-title {
+    margin: 0;
+    font-size: 1.5em;
+  }
+
+  .mat-mdc-tab-nav-bar {
+    flex-grow: 1;
+    margin-inline: 1rem;
+    border-radius: calc(var(--tab-height, 64px) / 2);
+  }
+
+  .mat-mdc-tab-link.mdc-tab {
+    height: var(--tab-height, 64px);
+    border-radius: calc(var(--tab-height, 64px) / 2);
+    text-decoration: none;
+    overflow: clip;
+  }
+
+}
+
+
+@mixin tab-theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  $is_dark: map.get($color-config, is-dark);
+  $primary-palette: map.get($color-config, primary);
+  $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
+  $background-palette: map.get($color-config, background);
+
+  .tab-container {
+    background-color: mat.get-color-from-palette($background-palette, 'background');
+
+    .mat-mdc-tab-nav-bar {
+      background: rgba($base_primary, 0.04);
+    }
+
+    .mat-mdc-tab-link.mdc-tab.mdc-tab--active  {
+      color: $base_primary;
+      background-color: rgba($base_primary, 0.1);
+    }
+  }
+}
+
+@include tab-theme(themes.$app-light-theme);
+
+::ng-deep body.dark app-layout-with-tabs-in-header {
+  @include tab-theme(themes.$app-dark-theme);
+}
+

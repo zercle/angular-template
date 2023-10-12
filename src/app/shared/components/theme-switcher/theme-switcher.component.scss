@@ -1,0 +1,9 @@
+@use 'animations';
+
+.mdc-icon-button {
+  &:hover {
+    .mat-icon {
+      animation: font-filled-and-bold 300ms animations.$transition-fn forwards;
+    }
+  }
+}

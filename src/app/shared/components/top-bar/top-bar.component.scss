@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use 'themes';
+
+.site-top-bar {
+  .mat-toolbar-row {
+    height: var(--top-bar-height, 64px) !important;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+
+  app-logo {
+    height: var(--top-bar-height, 64px);
+    max-width: 224px;
+    cursor: pointer;
+  }
+
+  app-search {
+    flex-grow: 1;
+    align-self: flex-start;
+    padding-block-start: 8px;
+  }
+
+  @media screen and (max-width: 599.98px) {
+    .btn-user-menu {
+      min-width: auto;
+      padding-inline: 8px;
+      .mat-icon {
+        margin: 0;
+      }
+      .user-name {
+        display: none;
+      }
+    }
+
+  }
+}
+
+@mixin top-bar-theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  $background-palette: map.get($color-config, background);
+
+  .site-top-bar {
+    &.mat-toolbar {
+      background: mat.get-color-from-palette($background-palette, background);
+    }
+
+    .btn-drawer-toggle-container {
+      background: mat.get-color-from-palette($background-palette, dialog);
+    }
+  }
+}
+
+@include top-bar-theme(themes.$app-theme);
+
+::ng-deep body.dark app-top-bar {
+  @include top-bar-theme(themes.$app-dark-theme);
+}

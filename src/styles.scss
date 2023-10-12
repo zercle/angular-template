@@ -1,0 +1,170 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use 'components';
+@use 'themes';
+@use 'mixins/global';
+@use 'animations';
+
+@include mat.core();
+@include mat.all-component-themes(themes.$app-theme);
+@include components.form-themes(themes.$app-theme);
+@include components.menu-themes(themes.$app-theme);
+@include components.table-themes(themes.$app-theme);
+@include components.paginator-themes(themes.$app-theme);
+
+@include animations.font-filled;
+
+:root {
+  --top-bar-height: 64px;
+  --tab-height: 64px;
+  --mdc-filled-button-container-shape: 18px;
+  --mdc-outlined-button-container-shape: 18px;
+  --mdc-text-button-container-shape: 18px;
+  --mdc-protected-button-container-shape: 18px;
+  --mat-card-title-text-size: 1.25em;
+  --mat-card-title-text-weight: bold;
+  .mat-mdc-raised-button {
+    --mdc-protected-button-container-shape: 18px;
+  }
+  .mat-mdc-unelevated-button {
+    --mdc-filled-button-container-shape: 18px;
+  }
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  @include global.default-base-color(themes.$app-theme);
+}
+
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.content-container {
+  container: content-container / inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  padding: 0 1rem 2rem;
+  &:has(.fab-container, + .fab-container) {
+    padding-block-end: 5rem;
+  }
+}
+
+.mdc-button__label  {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  --mdc-dialog-container-shape: 16px;
+}
+
+.mat-mdc-form-field .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 28px;
+  .mat-mdc-form-field-icon-suffix {
+    margin-inline-end: 4px;
+  }
+  .mat-mdc-form-field-icon-prefix {
+    margin-inline-start: 4px;
+  }
+}
+
+.mat-mdc-card {
+  @include mat.elevation(0);
+  overflow: clip;
+
+  &:has(mat-paginator:last-child) {
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+
+    .mat-mdc-paginator-container {
+      padding-inline: 4px;
+    }
+  }
+}
+
+.rounded-card.mat-mdc-card {
+  --mdc-elevated-card-container-shape: 16px;
+  &:has(.paginator-in-card-header) {
+    border-radius: 32px 32px var(--mdc-elevated-card-container-shape) var(--mdc-elevated-card-container-shape);
+  }
+}
+
+.mat-mdc-dialog-actions.mdc-dialog__actions {
+  padding: 10px 24px 24px;
+}
+
+.fab-container {
+  display: flex;
+  gap: 0.5rem;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+}
+
+.mdc-fab--extended {
+  --mdc-typography-button-text-transform: uppercase;
+  text-transform: uppercase;
+}
+
+.data-description {
+  --label-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  > div {
+    display: flex;
+    min-height: 24px;
+    margin-bottom: 0.5rem;
+    align-items: center;
+    > label, > dt {
+      display: inline-flex;
+      width: var(--label-width);
+      align-items: center;
+      margin: 0;
+    }
+    > *:nth-child(2) {
+      width: calc(100% - var(--label-width))
+    }
+    > span {
+
+    }
+  }
+}
+
+.overflowed-chip {
+  .mdc-evolution-chip-set__chips {
+    max-width: 100%;
+  }
+
+  .mat-mdc-standard-chip .mdc-evolution-chip__cell--primary,
+  .mat-mdc-standard-chip .mdc-evolution-chip__action--primary,
+  .mat-mdc-standard-chip .mat-mdc-chip-action-label {
+    overflow: hidden;
+  }
+}
+
+.mat-mdc-standard-chip .mdc-evolution-chip__icon--primary {
+  overflow: visible;
+}
+
+body.dark {
+  @include global.default-base-color(themes.$app-dark-theme);
+  @include mat.all-component-colors(themes.$app-dark-theme);
+  @include components.form-colors(themes.$app-dark-theme);
+  @include components.menu-colors(themes.$app-dark-theme);
+  @include components.table-colors(themes.$app-dark-theme);
+  @include components.paginator-colors(themes.$app-dark-theme);
+}

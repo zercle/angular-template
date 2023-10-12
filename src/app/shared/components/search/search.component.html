@@ -1,0 +1,23 @@
+<mat-form-field class="search-box" dense>
+  <!--  <mat-label>Search</mat-label>-->
+  <button mat-icon-button matPrefix>
+    <mat-icon>search</mat-icon>
+  </button>
+  <input matInput type="text" placeholder="Search" #searchInput aria-label="Search">
+  <button mat-icon-button matSuffix *ngIf="searchInput.value" (click)="searchInput.value = ''">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button mat-icon-button matSuffix (click)="filterPanel.expanded = !filterPanel.expanded">
+    <mat-icon>tune</mat-icon>
+  </button>
+</mat-form-field>
+<mat-expansion-panel class="filter-container" hideToggle #filterPanel="matExpansionPanel">
+  <section>
+
+    Hello
+  </section>
+  <mat-action-row>
+    <button mat-button>Clear</button>
+    <button mat-raised-button color="primary">Apply filter</button>
+  </mat-action-row>
+</mat-expansion-panel>

@@ -1,0 +1,61 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use 'themes';
+
+@mixin layout-theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  $primary-palette: map.get($color-config, primary);
+  $background-palette: map.get($color-config, background);
+
+  .page-container {
+    display: flex;
+    --main-menu-width: 68px;
+  }
+
+  app-top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  app-nav-rail {
+    z-index: 2;
+  }
+
+  .sidenav-container {
+    height: 100vh;
+    width: calc(100% - var(--main-menu-width, 68px));
+  }
+
+  .sidenav.mat-drawer {
+    width: 256px;
+    background: transparent;
+    border: none;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+}
+
+@mixin layout-color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $is_dark: map.get($color-config, is-dark);
+  $primary-palette: map.get($color-config, primary);
+  $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
+  $background-palette: map.get($color-config, background);
+
+  .sidenav {
+    background: transparent;
+    border: none;
+  }
+
+}
+
+
+@include layout-theme(themes.$app-theme);
+
+::ng-deep body.dark app-main-layout {
+  @include layout-color(themes.$app-dark-theme);
+}

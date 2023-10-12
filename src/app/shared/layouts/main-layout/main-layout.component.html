@@ -1,0 +1,21 @@
+<div class="page-container">
+  <app-nav-rail [menus]="nav_rail_menus" [drawer]="drawer"></app-nav-rail>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'side' : 'side'"
+                 [opened]="(isHandset$ | async) === false"
+                 [ngClass]="{hidden: !showSidebar}"
+                 [hidden]="!showSidebar"
+    >
+      <app-nav-drawer [menus]="menus"></app-nav-drawer>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-top-bar [hideAppLogo]="hideAppLogoInNavbar" [showSearchBar]="showSearchBar"></app-top-bar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+
