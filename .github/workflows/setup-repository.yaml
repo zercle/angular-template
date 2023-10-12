@@ -10,14 +10,8 @@ jobs:
     env:
       REPO_SETUP_TOKEN: ${{ secrets.REPO_SETUP_TOKEN }}
     steps:
-      - name: Do not run scaffolding on template repository
+      - name: Check if this repo is a template repo then exit
         shell: bash
-        # This workflow runs when the `cookiecutter.json` file is modified.
-        # This is the trick to re-init a repository, but we don't want to
-        # run this action if this file is modified in the origin template repository.
-        #
-        # Using the GitHub rest API allows us to identify if the current repository
-        # is a template repository or not.
         run: |
           curl --silent -X GET \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -27,12 +21,6 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          # Comminting workflow files using the regular GITHUB_TOKEN will fail with
-          # `Git Error: Refusing to allow a GitHub App to create or update workflow without workflows permission`.
-          # This is by design to prevent third-parties from adding malicious workflow files.
-          #
-          # Generate a new personal access token with the workflow `scope` does the trick.
-          # Checkout my blog post https://stefanbuck.com/blog for alternative options
           token: ${{ env.REPO_SETUP_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Replace project name
@@ -42,11 +30,8 @@ jobs:
           replace: ${{ github.event.repository.name }}
           regex: false
 
-      - name: Remove worker file
+      - name: Remove this worker file
         shell: bash
-        # The cookiecutter-temp/ folder contains a single folder which is the
-        # generated project by cookiecutter. We want to move all the project
-        # files into the root directory so we can reinitialize git in the next step
         run: |
           rm ./.github/workflows/setup-repository.yaml
 
