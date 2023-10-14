@@ -2,16 +2,16 @@ import {Menu} from "../../shared/models/menu.model";
 
 export const MINI_SIDENAV_MENU: Menu[] = [
   {
-    name: 'POS',
-    path: '/pos',
+    name: 'Link',
+    path: '/link',
     icon: {
-      name: 'point_of_sale'
+      name: 'info'
     }
   }, {
-    name: 'Reports',
-    path: '/reports',
+    name: 'Link',
+    path: '/link',
     icon: {
-      name: 'monitoring'
+      name: 'info'
     }
   }, {
     name: 'System',
@@ -32,9 +32,9 @@ export const SIDEBAR_SYSTEM_MENU: Menu[] = [
         icon: {name: 'dashboard'},
         path: '/system/dashboard'
       }, {
-        name: 'Transactions',
-        icon: {name: 'receipt_long'},
-        path: '/system/transactions'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       },
     ]
   }, {
@@ -42,21 +42,21 @@ export const SIDEBAR_SYSTEM_MENU: Menu[] = [
     path: '/system',
     children: [
       {
-        name: 'Projects',
-        icon: {name: 'widgets'},
-        path: '/system/projects'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       }, {
-        name: 'Connections',
-        icon: {name: 'dataset_linked'},
-        path: '/system/connections'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       }, {
-        name: 'Banks',
-        icon: {name: 'account_balance'},
-        path: '/system/banks'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       }, {
-        name: 'Divisions',
-        icon: {name: 'domain'},
-        path: '/system/divisions'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       },
     ]
   }, {
@@ -64,28 +64,18 @@ export const SIDEBAR_SYSTEM_MENU: Menu[] = [
     path: '/system',
     children: [
       {
-        name: 'Users & Permissions',
-        icon: {name: 'group'},
-        path: '/system/uap'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       }, {
-        name: 'Logs',
-        icon: {name: 'history'},
-        path: '/system/logs'
-      }
-    ]
-  }, {
-    name: '',
-    path: '/system',
-    children: [
-      {
-        name: 'APIs',
-        icon: {name: 'code'},
-        path: '/system/apis'
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
       }, {
-        name: 'Documentation',
-        icon: {name: 'chrome_reader_mode'},
-        path: '/docs'
-      }
+        name: 'Link',
+        icon: {name: 'info'},
+        path: '/system/link'
+      },
     ]
   }
 ];

@@ -1,16 +1,16 @@
 <app-logo class="site-logo" routerLink="/"></app-logo>
-<mat-nav-list class="navigation-drawer-menu">
+<mat-nav-list class="nav-drawer-menu">
   <ng-container *ngFor="let menuGroup of menus; let last = last;">
     <h4 *ngIf="menuGroup.name" mat-subheader>{{ menuGroup.name | titlecase }}</h4>
     <ng-container *ngFor="let menuItem of menuGroup.children">
       <ng-container *ngIf="!menuItem.children">
         <a [routerLink]="menuItem.path" mat-list-item
            routerLinkActive="active">
-          <mat-icon *ngIf="!menuItem.icon?.custom" class="list-icon navigation-drawer-list-icon"
+          <mat-icon *ngIf="!menuItem.icon?.custom" class="list-icon nav-drawer-list-icon"
                     matListItemIcon>{{ menuItem.icon?.name
             }}
           </mat-icon>
-          <mat-icon *ngIf="menuItem.icon && menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon navigation-drawer-list-icon"
+          <mat-icon *ngIf="menuItem.icon && menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon nav-drawer-list-icon"
                     matListItemIcon></mat-icon>
           <span matListItemTitle>
           {{ menuItem.name }}
@@ -35,10 +35,10 @@
               <ng-container *ngIf="menuItem.icon">
                 <mat-icon *ngIf="menuItem.icon.custom; else defaultIcon;"
                           [svgIcon]="menuItem.icon.name"
-                          class="list-icon navigation-drawer-list-icon"
+                          class="list-icon nav-drawer-list-icon"
                           matListItemIcon></mat-icon>
                 <ng-template #defaultIcon>
-                  <mat-icon class="list-icon navigation-drawer-list-icon" matListItemIcon>
+                  <mat-icon class="list-icon nav-drawer-list-icon" matListItemIcon>
                     {{ menuItem.icon.name }}</mat-icon>
                 </ng-template>
               </ng-container>
@@ -48,30 +48,35 @@
           <mat-nav-list>
 
             <ng-container *ngFor="let subMenuItem of menuItem.children">
-              <a *ngIf="subMenuItem.name as menuName;" [routerLink]="subMenuItem.path"
-                 class="sub-menu-item" mat-list-item routerLinkActive="active">
-                <mat-icon class="list-icon navigation-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
-                <span matListItemTitle>
-                {{ menuName }}
-              </span>
-              </a>
+              @if (subMenuItem.name) {
+                <a [routerLink]="subMenuItem.path"
+                   class="sub-menu-item" mat-list-item routerLinkActive="active">
+                  <mat-icon class="list-icon nav-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
+                  <span matListItemTitle>
+                  {{ subMenuItem.name }}
+                  </span>
+                </a>
+              }
+
             </ng-container>
           </mat-nav-list>
         </mat-expansion-panel>
       </ng-container>
     </ng-container>
-    <mat-divider *ngIf="!last"></mat-divider>
+    @if (!last) {
+      <mat-divider *ngIf="!last"></mat-divider>
+    }
   </ng-container>
 </mat-nav-list>
 
 <ng-template #menuItemTemplate let-menuItem="menu">
   <a [routerLink]="menuItem.path" mat-list-item
      routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon navigation-drawer-list-icon"
+    <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon nav-drawer-list-icon"
               matListItemIcon>{{ menuItem.icon.name
       }}
     </mat-icon>
-    <mat-icon *ngIf="menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon navigation-drawer-list-icon"
+    <mat-icon *ngIf="menuItem.icon.custom" [svgIcon]="menuItem.icon.name" class="list-icon nav-drawer-list-icon"
               matListItemIcon></mat-icon>
     <span matListItemTitle>
           {{ menuItem.name }}
@@ -98,11 +103,11 @@
     dense>
     <mat-expansion-panel-header>
       <a mat-list-item routerLinkActive="active" [disableRipple]="true">
-        <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon navigation-drawer-list-icon" matListItemIcon>
+        <mat-icon *ngIf="!menuItem.icon.custom" class="list-icon nav-drawer-list-icon" matListItemIcon>
           {{ menuItem.icon.name }}</mat-icon>
         <mat-icon *ngIf="menuItem.icon.custom"
                   [svgIcon]="menuItem.icon.name"
-                  class="list-icon navigation-drawer-list-icon"
+                  class="list-icon nav-drawer-list-icon"
                   matListItemIcon></mat-icon>
         <div class="title-with-spacer selected-user-group-text">{{ groupName }}</div>
       </a>
@@ -111,7 +116,7 @@
       <ng-container *ngFor="let subMenuItem of menuItem.children">
         <a *ngIf="subMenuItem.name as menuName;" [routerLink]="subMenuItem.path"
            class="sub-menu-item" mat-list-item routerLinkActive="active">
-          <mat-icon class="list-icon navigation-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
+          <mat-icon class="list-icon nav-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
           <span matListItemTitle>
                 {{ menuName }}
               </span>

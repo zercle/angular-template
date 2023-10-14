@@ -28,7 +28,7 @@ jobs:
           replace: ${{ github.event.repository.name }}
           regex: false
 
-      - name: Remove this worker file
+      - name: Remove this workflow file
         shell: bash
         run: |
           rm ./.github/workflows/setup-repository.yaml
