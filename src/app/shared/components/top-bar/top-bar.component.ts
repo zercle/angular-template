@@ -12,54 +12,59 @@ import { UiService } from "../../services/ui/ui.service";
 import { LogoComponent } from "../logo/logo.component";
 import { ThemeSwitcherComponent } from "../theme-switcher/theme-switcher.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDrawer } from "@angular/material/sidenav";
 
 @Component({
-    standalone: true,
-    selector: 'app-top-bar',
-    imports: [
-        MatToolbarModule,
-        SearchComponent,
-        MatMenuModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        NgIf,
-        LogoComponent,
-        RouterLink,
-        ThemeSwitcherComponent,
-        MatFormFieldModule
-    ],
-    templateUrl: './top-bar.component.html',
-    styleUrls: ['./top-bar.component.scss'],
+  standalone: true,
+  selector: 'app-top-bar',
+  imports: [
+    MatToolbarModule,
+    SearchComponent,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    NgIf,
+    LogoComponent,
+    RouterLink,
+    ThemeSwitcherComponent,
+    MatFormFieldModule
+  ],
+  templateUrl: './top-bar.component.html',
+  styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
 
-    appHasUpdate = inject(UiService).appHasUpdate;
-    public navbarTitle = 'kku dms v4';
-    @Input({transform: booleanAttribute}) hideAppLogo = false;
-    @Input({transform: booleanAttribute}) showSearchBar = false;
-    @Input({transform: booleanAttribute}) showThemeSwitcher = false;
-    #router = inject(Router);
-    #auth = inject(AuthService);
-    user = this.#auth.user;
-    #document = inject(DOCUMENT);
+  appHasUpdate = inject(UiService).appHasUpdate;
+  public navbarTitle = 'kku dms v4';
 
-    constructor() {
-    }
+  @Input() drawer!: MatDrawer;
+  @Input({transform: booleanAttribute}) hideAppLogo = false;
+  @Input({transform: booleanAttribute}) showSearchBar = false;
+  @Input({transform: booleanAttribute}) showThemeSwitcher = false;
+  #router = inject(Router);
+  #auth = inject(AuthService);
+  user = this.#auth.user;
+  #document = inject(DOCUMENT);
 
-    ngOnInit(): void {
+  isHandset = inject(UiService).isHandset;
 
-    }
+  constructor() {
+  }
 
-    reloadApp() {
-        this.#document.location.reload();
-    }
+  ngOnInit(): void {
 
-    signIn() {
-        this.#auth.signInWithKKUAccount();
-    }
+  }
 
-    signOut() {
-        this.#auth.signOut();
-    }
+  reloadApp() {
+    this.#document.location.reload();
+  }
+
+  signIn() {
+    this.#auth.signInWithKKUAccount();
+  }
+
+  signOut() {
+    this.#auth.signOut();
+  }
 }

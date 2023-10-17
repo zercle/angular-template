@@ -1,18 +1,38 @@
 <mat-toolbar class="site-top-bar">
   <mat-toolbar-row>
+    @if (isHandset()) {
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>
+          @if (drawer.opened) {
+            menu_open
+          } @else {
+            menu
+          }
+        </mat-icon>
+      </button>
+    }
     <app-logo *ngIf="!hideAppLogo" routerLink="/"></app-logo>
     <span class="flex-spacer" *ngIf="(!hideAppLogo || !showSearchBar)"></span>
     <app-search class="search-box" *ngIf="showSearchBar"></app-search>
     <button mat-stroked-button color="primary" *ngIf="appHasUpdate()" (click)="reloadApp()">Finish update</button>
     <app-theme-switcher *ngIf="showThemeSwitcher"></app-theme-switcher>
-    <button class="btn-user-menu" mat-stroked-button
+    @if (isHandset()) {
+      <button mat-icon-button
+        [matMenuTriggerFor]="userMenu"
+        (menuClosed)="true"
+        [attr.aria-label]="'Open User menu for #username'">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    } @else {
+      <button class="btn-user-menu" mat-stroked-button
             *ngIf="user() as user; else signInButton"
             [matMenuTriggerFor]="userMenu"
             (menuClosed)="true"
             [attr.aria-label]="'Open User menu for #username'">
-      <mat-icon>account_circle</mat-icon>
-      <span class="user-name">#username</span>
-    </button>
+        <mat-icon>account_circle</mat-icon>
+        <span class="user-name">#username</span>
+      </button>
+    }
   </mat-toolbar-row>
 </mat-toolbar>
 

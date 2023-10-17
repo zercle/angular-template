@@ -3,121 +3,6 @@
 @use 'themes';
 @use 'animations';
 
-app-logo {
-  display: block;
-  height: 64px;
-  width: 256px;
-  padding: 0 16px;
-  box-sizing: border-box;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  cursor: pointer;
-}
-
-.mat-mdc-nav-list.nav-drawer-menu {
-
-  .mat-divider {
-    margin: 4px 0;
-  }
-
-  .mat-mdc-list-item {
-    height: 40px !important;
-    margin: 8px;
-    width: calc(100% - 16px);
-    border-radius: 20px;
-    font-size: 0.875rem;
-    overflow: hidden;
-
-    .mdc-list-item__primary-text {
-      font-size: 0.875rem;
-    }
-
-    .mat-icon {
-
-    }
-
-    &.active {
-      .mat-icon {
-        font-variation-settings: 'FILL' 1;
-      }
-    }
-
-    &:hover {
-      .mat-icon {
-        animation: font-filled-and-bold 300ms animations.$transition-fn both;
-      }
-    }
-
-    /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-    &.mat-list-item-disabled {
-      background-color: transparent;
-      opacity: 0.5;
-    }
-
-    /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-    .mdc-list-item__content {
-      padding: 0 8px;
-    }
-
-    .mdc-list-item__primary-text {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .list-icon {
-      margin-inline-end: 16px;
-
-      &.sub-list-icon {
-        opacity: 0.25;
-      }
-    }
-  }
-
-  .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
-    background: none;
-  }
-}
-
-.mat-mdc-nav-list {
-  padding-top: 0;
-}
-
-mat-expansion-panel {
-  border-radius: 0;
-
-  &.active {
-    mat-expansion-panel-header {
-      .mat-mdc-list-item {
-        .mat-icon {
-          font-variation-settings: 'FILL' 1;
-        }
-      }
-    }
-  }
-}
-
-mat-expansion-panel-header {
-  padding: 0 16px 0 0;
-
-  .mat-mdc-list-item {
-    &:hover {
-      background-color: transparent;
-
-      .mat-icon {
-        font-variation-settings: 'wght' 700;
-      }
-    }
-  }
-}
-
-.expandable-list {
-  ::ng-deep .mat-expansion-panel-body {
-    padding: 0;
-  }
-}
-
 @mixin nav-drawer-theme($theme) {
   $color-config: mat.get-color-config($theme);
   $is_dark: map.get($color-config, is-dark);
@@ -125,22 +10,152 @@ mat-expansion-panel-header {
   $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
   $background-palette: map.get($color-config, background);
 
-  .site-logo {
-    background-color: mat.get-color-from-palette($background-palette, background);
+  app-logo {
+    display: block;
+    height: 64px;
+    width: 256px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
   }
 
   .mat-mdc-nav-list.nav-drawer-menu {
+
+    .mat-divider {
+      margin: 4px 0;
+    }
+
+    .mat-mdc-list-item {
+      height: 40px !important;
+      margin: 8px;
+      width: calc(100% - 16px);
+      border-radius: 20px;
+      font-size: 0.875rem;
+      overflow: hidden;
+
+      .mdc-list-item__primary-text {
+        font-size: 0.875rem;
+      }
+
+      .mat-icon {
+
+      }
+
+      &.active, &:hover {
+        background-color: rgba($base_primary, 0.1);
+        color: $base_primary;
+
+        .mat-icon {
+          color: $base_primary;
+        }
+      }
+
+      &.active {
+        .mat-icon {
+          font-variation-settings: 'FILL' 1;
+        }
+      }
+
+      &:hover {
+        .mat-icon {
+          animation: font-filled-and-bold 300ms animations.$transition-fn both;
+        }
+      }
+
+      /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+      &.mat-list-item-disabled {
+        background-color: transparent;
+        opacity: 0.5;
+      }
+
+      /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+      .mdc-list-item__content {
+        padding: 0 8px;
+      }
+
+      .mdc-list-item__primary-text {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .list-icon {
+        margin-inline-end: 16px;
+
+        &.sub-list-icon {
+          opacity: 0.25;
+        }
+      }
+    }
+
+    .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
+      background: none;
+    }
+  }
+
+  .mat-mdc-nav-list {
+    padding-top: 0;
+  }
+
+  mat-expansion-panel {
+    border-radius: 0;
+
+    &.active {
+      mat-expansion-panel-header {
+        .mat-mdc-list-item {
+          .mat-icon {
+            font-variation-settings: 'FILL' 1;
+          }
+        }
+      }
+    }
+  }
+
+  mat-expansion-panel-header {
+    padding: 0 16px 0 0;
+
+    .mat-mdc-list-item {
+      &:hover {
+        background-color: transparent;
+
+        .mat-icon {
+          font-variation-settings: 'wght' 700;
+        }
+      }
+    }
+  }
+
+  .expandable-list {
+    ::ng-deep .mat-expansion-panel-body {
+      padding: 0;
+    }
+  }
+}
+
+@mixin nav-drawer-color($theme) {
+  $color-config: mat.get-color-config($theme);
+  $is_dark: map.get($color-config, is-dark);
+  $primary-palette: map.get($color-config, primary);
+  $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
+  $background-palette: map.get($color-config, background);
+
+  .nav-drawer-menu {
     .mat-mdc-list-item {
       &.active, &:hover {
         background-color: rgba($base_primary, 0.1);
         color: $base_primary;
 
-        .mdc-list-item__primary-text {
-          color: inherit;
-        }
-
         .mat-icon {
           color: $base_primary;
+        }
+
+        .mdc-list-item__content {
+          .mdc-list-item__primary-text {
+            color: $base_primary;
+          }
         }
       }
     }
@@ -165,6 +180,6 @@ mat-expansion-panel-header {
 
 @include nav-drawer-theme(themes.$app-theme);
 
-::ng-deep body.dark app-nav-drawer {
-  @include nav-drawer-theme(themes.$app-dark-theme);
+::ng-deep #app-body.dark app-nav-drawer {
+  @include nav-drawer-color(themes.$app-dark-theme);
 }

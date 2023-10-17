@@ -46,25 +46,23 @@
             </a>
           </mat-expansion-panel-header>
           <mat-nav-list>
-
-            <ng-container *ngFor="let subMenuItem of menuItem.children">
+            @for (subMenuItem of menuItem.children; track subMenuItem.name) {
               @if (subMenuItem.name) {
                 <a [routerLink]="subMenuItem.path"
                    class="sub-menu-item" mat-list-item routerLinkActive="active">
                   <mat-icon class="list-icon nav-drawer-list-icon sub-list-icon" matListItemIcon>line_end</mat-icon>
                   <span matListItemTitle>
-                  {{ subMenuItem.name }}
+                    {{ subMenuItem.name }}
                   </span>
                 </a>
               }
-
-            </ng-container>
+            }
           </mat-nav-list>
         </mat-expansion-panel>
       </ng-container>
     </ng-container>
     @if (!last) {
-      <mat-divider *ngIf="!last"></mat-divider>
+      <mat-divider></mat-divider>
     }
   </ng-container>
 </mat-nav-list>

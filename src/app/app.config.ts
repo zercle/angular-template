@@ -11,7 +11,7 @@ import { routes } from './app.routes';
 import { provideClientHydration, Title } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from "@angular/common/http";
 import { TemplatePageTitleStrategy } from "./core/providers/title-strategy.provider";
 
 export const appConfig: ApplicationConfig = {
@@ -28,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimations(),
     provideHttpClient(
+      withFetch(),
       withInterceptorsFromDi()
     ),
     Title,

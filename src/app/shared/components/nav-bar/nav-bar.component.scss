@@ -3,39 +3,24 @@
 @use 'themes';
 @use 'animations';
 
-@mixin nav-rail-theme($theme) {
+@mixin nav-bar-theme($theme) {
   $color-config: mat.get-color-config($theme);
   $primary-palette: map.get($color-config, primary);
   $background-palette: map.get($color-config, background);
 
-  .nav-rail-container {
-    width: var(--nav-rail-width);
-    min-height: 100vh;
-    z-index: 2;
-    padding: 0 8px 8px;
-    display: flex;
+  .nav-bar-menu {
     box-sizing: border-box;
-    flex-direction: column;
+    width: 100vw;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
+    z-index: 2;
+    padding: 12px 0 16px;
     background: mat.get-color-from-palette($background-palette, dialog);
-  }
-
-  .btn-drawer-toggle-container {
-    width: var(--main-menu-width, 68px);
-    height: var(--top-bar-height, 64px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .nav-rail-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    .mat-mdc-nav-list {
-      width: 100%;
-    }
 
     ::ng-deep .mat-mdc-list-item {
       flex-direction: column;
@@ -43,11 +28,12 @@
       height: initial;
       padding: 0;
       gap: 0.25em;
+      width: min-content;
 
       .mat-icon {
         margin: initial;
-        padding: 0.25em 0.625em;
-        border-radius: 18px;
+        padding: 4px 20px;
+        border-radius: 16px;
       }
 
       .mdc-list-item__content {
@@ -56,7 +42,7 @@
 
       &:hover {
         .mat-icon {
-          animation: font-filled-and-bold 300ms animations.$transition-fn both;
+
         }
       }
 
@@ -74,6 +60,7 @@
         }
 
         .mdc-list-item__content {
+          font-weight: bold;
           .mdc-list-item__primary-text {
             color: mat.get-color-from-palette($primary-palette, 600);
           }
@@ -83,18 +70,19 @@
   }
 }
 
-@mixin nav-rail-color($theme) {
+@mixin nav-bar-color($theme) {
   $color-config: mat.get-color-config($theme);
   $is_dark: map.get($color-config, is-dark);
   $primary-palette: map.get($color-config, primary);
   $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
   $background-palette: map.get($color-config, background);
 
-  .nav-rail-container {
-    background: mat.get-color-from-palette($background-palette, dialog);
+  .nav-bar-container {
+
   }
 
-  .nav-rail-menu {
+  .nav-bar-menu {
+    background: mat.get-color-from-palette($background-palette, dialog);
     .mat-mdc-list-item {
 
       &.active, &:hover, &:focus {
@@ -113,8 +101,8 @@
   }
 }
 
-@include nav-rail-theme(themes.$app-theme);
+@include nav-bar-theme(themes.$app-theme);
 
-::ng-deep #app-body.dark app-nav-rail {
-  @include nav-rail-color(themes.$app-dark-theme)
+::ng-deep #app-body.dark app-nav-bar {
+  @include nav-bar-color(themes.$app-dark-theme)
 }

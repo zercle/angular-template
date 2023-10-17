@@ -25,8 +25,12 @@
 
     .mat-mdc-form-field-infix {
       min-height: 48px;
-      padding-block: 8px !important;
+      padding-block: 0 !important;
       display: flex;
+    }
+
+    .mat-mdc-form-field-icon-prefix {
+      padding: 0;
     }
 
     &.mat-focused {
@@ -122,6 +126,6 @@
 @include search-theme(themes.$app-theme);
 @include search-color(themes.$app-theme);
 
-::ng-deep body.dark app-search {
+::ng-deep #app-body.dark app-search {
   @include search-color(themes.$app-dark-theme);
 }

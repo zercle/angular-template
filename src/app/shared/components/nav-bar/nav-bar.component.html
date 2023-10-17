@@ -1,0 +1,14 @@
+<mat-nav-list class="nav-bar-menu">
+  @for (menuItem of menus; track menuItem.name) {
+    <a [routerLink]="menuItem.path" mat-list-item [disableRipple]="true"
+       routerLinkActive="active" [routerLinkActiveOptions]="{exact: menuItem.exact ?? false}">
+<!--  TODO: There is a bug deal to incorrect render matListItemIcon in new control flow.
+            Convert to new control flow when bug has been fixed  -->
+      <mat-icon *ngIf="!menuItem.icon?.custom" class="list-icon nav-rail-list-icon"
+                  matListItemIcon>{{ menuItem.icon?.name }}</mat-icon>
+      <mat-icon *ngIf="menuItem.icon && menuItem.icon.custom" [svgIcon]="menuItem.icon.name"
+                  class="list-icon nav-rail-list-icon" matListItemIcon></mat-icon>
+      <span matListItemTitle>{{ menuItem.name }}</span>
+    </a>
+  }
+</mat-nav-list>

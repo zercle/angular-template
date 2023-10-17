@@ -63,7 +63,7 @@
 
 @include tab-theme(themes.$app-light-theme);
 
-::ng-deep body.dark app-layout-with-tabs-in-header {
+::ng-deep #app-body.dark app-layout-with-tabs-in-header {
   @include tab-theme(themes.$app-dark-theme);
 }
 

@@ -1,7 +1,13 @@
 <nav class="nav-rail-container">
   <div class="btn-drawer-toggle-container">
     <button type="button" aria-label="Toggle Menu" mat-icon-button (click)="drawer.toggle()">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <mat-icon aria-label="Side nav toggle icon">
+        @if (drawer.opened) {
+          menu_open
+        } @else {
+          menu
+        }
+      </mat-icon>
     </button>
   </div>
   <mat-nav-list class="nav-rail-menu">
@@ -9,7 +15,7 @@
       <ng-container *ngIf="!menuItem.children">
         <ng-container>
           <a [routerLink]="menuItem.path" mat-list-item [disableRipple]="true"
-             routerLinkActive="active">
+             routerLinkActive="active" [routerLinkActiveOptions]="{exact: menuItem.exact ?? false}">
             <mat-icon *ngIf="!menuItem.icon?.custom" class="list-icon nav-rail-list-icon"
                       matListItemIcon>{{ menuItem.icon?.name
               }}

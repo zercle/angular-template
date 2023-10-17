@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { NgIf } from "@angular/common";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { UiService } from "../../services/ui/ui.service";
 
 @Component({
     selector: 'app-search',
@@ -21,5 +22,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
     styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
+
+  isHandset = inject(UiService).isHandset;
 
 }

@@ -9,7 +9,6 @@
 
   .page-container {
     display: flex;
-    --main-menu-width: 68px;
   }
 
   app-top-bar {
@@ -20,16 +19,21 @@
 
   app-nav-rail {
     z-index: 2;
+    position: fixed;
   }
 
   .sidenav-container {
     height: 100vh;
-    width: calc(100% - var(--main-menu-width, 68px));
+    padding-inline-start: var(--nav-rail-width);
+    width: 100%;
+
+    &.mobile {
+      padding-inline-start: 0;
+    }
   }
 
   .sidenav.mat-drawer {
     width: 256px;
-    background: transparent;
     border: none;
 
     &.hidden {
@@ -46,8 +50,8 @@
   $base_primary: mat.get-color-from-palette($primary-palette, if($is_dark, 300, 600));
   $background-palette: map.get($color-config, background);
 
-  .sidenav {
-    background: transparent;
+  .sidenav.mat-drawer {
+    background-color: mat.get-color-from-palette($background-palette, background);
     border: none;
   }
 
@@ -55,7 +59,8 @@
 
 
 @include layout-theme(themes.$app-theme);
+@include layout-color(themes.$app-theme);
 
-::ng-deep body.dark app-main-layout {
+::ng-deep #app-body.dark app-main-layout {
   @include layout-color(themes.$app-dark-theme);
 }

@@ -4,5 +4,6 @@ export interface Menu {
   name: string;
   icon?: Icon;
   path?: string;
+  exact?: boolean;
   children? : Menu[]
 }

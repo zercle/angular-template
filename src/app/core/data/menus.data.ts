@@ -1,14 +1,21 @@
 import {Menu} from "../../shared/models/menu.model";
 
-export const MINI_SIDENAV_MENU: Menu[] = [
+export const MAIN_NAVIGATION_MENU: Menu[] = [
   {
-    name: 'Link',
+    name: 'Home',
+    path: '/',
+    exact: true,
+    icon: {
+      name: 'home'
+    }
+  }, {
+    name: 'Link1',
     path: '/link',
     icon: {
       name: 'info'
     }
   }, {
-    name: 'Link',
+    name: 'Link2',
     path: '/link',
     icon: {
       name: 'info'

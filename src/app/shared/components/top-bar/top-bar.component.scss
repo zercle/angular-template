@@ -53,6 +53,6 @@
 
 @include top-bar-theme(themes.$app-theme);
 
-::ng-deep body.dark app-top-bar {
+::ng-deep #app-body.dark app-top-bar {
   @include top-bar-theme(themes.$app-dark-theme);
 }
